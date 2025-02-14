@@ -120,7 +120,8 @@ async def send_pools(message: Message):
         else:
             for pool in bitget_data["pools"]:
                 pool_name = pool["productCoinName"]
-                time_left = format_time_left(pool["endTime"] / 1000)
+                time_left = format_time_left(int(pool.get("endTime", 0)) / 1000)
+
                 for stake in pool["productSubList"]:
                     apr = float(stake["apr"])
                     coin = stake["productSubCoinName"]
